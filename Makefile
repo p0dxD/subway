@@ -22,6 +22,7 @@ all: start
 start:
 	go build -o subway
 	./subway
+	
 # Install just performs a normal `go install` which builds the source
 # files from the package at `./` (I like to keep a `main.go` in the root
 # that imports other subpackages). 
