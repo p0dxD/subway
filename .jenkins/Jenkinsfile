@@ -1,3 +1,1 @@
-@Library("Jenkins") _
-
-jenkinsMain()
+println "asdasd"
