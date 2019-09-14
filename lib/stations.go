@@ -10,6 +10,7 @@ import (
         "strings"
         "path/filepath"	
         "io/ioutil"
+        "reflect"
 
         rtree "github.com/dhconnelly/rtreego"
         geojson "github.com/paulmach/go.geojson"
@@ -55,18 +56,38 @@ func cacheGeoJSON() {
 // Init is called from the App Engine runtime to initialize the app.
 func Init() {
         cacheGeoJSON()
-        loadStations()
+        refreshStations(nil)
         http.HandleFunc("/data/subway-stations", subwayStationsHandler)
         http.HandleFunc("/data/subway-lines", subwayLinesHandler)
+        http.HandleFunc("/loadstation", loadStations)
 }
 
 func subwayLinesHandler(w http.ResponseWriter, r *http.Request) {
         w.Header().Set("Content-type", "application/json")
         w.Write(GeoJSON["subway-lines.geojson"])
 }
+
 // loadStations loads the geojson features from
 // `subway-stations.geojson` into the `Stations` rtree.
-func loadStations() {
+func loadStations(w http.ResponseWriter, r *http.Request) {
+        stationsArray, ok := r.URL.Query()["stations"]
+    
+        if !ok || len(stationsArray[0]) < 1 {
+            log.Println("Url Param 'key' is missing")
+            return
+        }
+    
+        // Query()["key"] will return an array of items, 
+        // we only want the single item.
+        stations := stationsArray[0]
+    
+        log.Println("Url Param 'stations' is: " + string(stations))
+
+        refreshStations(nil)
+}
+
+func refreshStations(stations []string){
+        Stations = rtree.NewTree(2, 25, 50)
         stationsGeojson := GeoJSON["subway-stations.geojson"]
         fc, err := geojson.UnmarshalFeatureCollection(stationsGeojson)
         if err != nil {
@@ -74,26 +95,49 @@ func loadStations() {
                 log.Fatal(err)
         }
         for _, f := range fc.Features {
-                Stations.Insert(&Station{f})
-        }
+                fmt.Println(reflect.TypeOf(f.Properties))
+                fmt.Printf("Inserting station:%+v\n",f.Properties)
+                fmt.Printf("Inserting station:%s\n",f.Properties["line"])
+                if stations != nil {
+                if strings.Contains(f.Properties["line"].(string), "1")  {
+                        Stations.Insert(&Station{f})
+                }
+                }else {
+                        Stations.Insert(&Station{f})
+                }
+        }   
+        //http://localhost:3001/loadstation?stations=this,is,one,two
+        //
+        //
 }
-
 // subwayStationsHandler reads r for a "viewport" query parameter
 // and writes a GeoJSON response of the features contained in
 // that viewport into w.
 func subwayStationsHandler(w http.ResponseWriter, r *http.Request) {
+        var a = []string{"Hello"}
+        refreshStations(a)
         w.Header().Set("Content-type", "application/json")
         vp := r.FormValue("viewport")
+        // fmt.Printf("Viewport: %s", vp)
         rect, err := newRect(vp)
         if err != nil {
                 str := fmt.Sprintf("Couldn't parse viewport: %s", err)
                 http.Error(w, str, 400)
                 return
         }
+        zm, err := strconv.ParseInt(r.FormValue("zoom"), 10, 0)
+        if err != nil {
+                str := fmt.Sprintf("Couldn't parse zoom: %s", err)
+                http.Error(w, str, 400)
+                return
+        }
         s := Stations.SearchIntersect(rect)
-        fc := geojson.NewFeatureCollection()
-        for _, station := range s {
-                fc.AddFeature(station.(*Station).feature)
+        fc, err := clusterStations(s, int(zm))
+        fmt.Printf("Fucking object: %+v\n\n", fc)
+        if err != nil {
+                str := fmt.Sprintf("Couldn't cluster results: %s", err)
+                http.Error(w, str, 500)
+                return
         }
         err = json.NewEncoder(w).Encode(fc)
         if err != nil {
@@ -101,6 +145,7 @@ func subwayStationsHandler(w http.ResponseWriter, r *http.Request) {
                 http.Error(w, str, 500)
                 return
         }
+
 }
 
 // newRect constructs a `*rtree.Rect` for a viewport.
@@ -129,14 +174,17 @@ func newRect(vp string) (*rtree.Rect, error) {
         distLat := math.Max(swLat, neLat) - minLat
         distLng := math.Max(swLng, neLng) - minLng
 
+        // Grow the rect to ameliorate issues with stations
+        // disappearing on Zoom in, and being slow to appear
+        // on Pan or Zoom out.
         r, err := rtree.NewRect(
                 rtree.Point{
-                        minLng,
-                        minLat,
+                        minLng - distLng/10,
+                        minLat - distLat/10,
                 },
                 []float64{
-                        distLng,
-                        distLat,
+                        distLng * 1.2,
+                        distLat * 1.2,
                 })
         if err != nil {
                 return nil, err
