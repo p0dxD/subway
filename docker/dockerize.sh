@@ -1,4 +1,4 @@
 #!/bin/bash
-docker="$DOCKER"/docker.exe
+# docker="$DOCKER"/docker.exe
 
-"$docker" build -t go-subway -f docker/Dockerfile .
+docker build -t go-subway -f docker/Dockerfile .
