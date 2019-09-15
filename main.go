@@ -8,7 +8,6 @@ import (
 
 
 func main() {
-        log.Print("demo 2S")
         L.Init()
         http.Handle("/", http.FileServer(http.Dir("./static")))
         log.Print("Now serving: http://localhost:3001")
