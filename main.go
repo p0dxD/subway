@@ -1,14 +1,14 @@
-package main
+package subway
 
 import (
         "log"
         "net/http"
-        "github.com/p0dxd/subway/lib"
+        L "pkg/libs"
 )
 
 
 func main() {
-        subway.Init()
+        L.Init()
         http.Handle("/", http.FileServer(http.Dir("./static")))
         log.Print("Now serving: http://localhost:3001")
         http.ListenAndServe(":3001", nil)
