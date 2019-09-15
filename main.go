@@ -1,9 +1,9 @@
-package subway
+package main
 
 import (
         "log"
         "net/http"
-        L "pkg/libs"
+        L "./pkg/libs"
 )
 
 
