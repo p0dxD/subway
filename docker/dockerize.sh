@@ -14,5 +14,3 @@ fi
 
 echo "Starting new container"
 docker run -d -it -p 3001:3001 go-subway
-
-cat /home/.secrets
