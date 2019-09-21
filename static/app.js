@@ -214,6 +214,7 @@ function initMap() {
 
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
+  let stationDataFeatures = [];
   console.log("Removing: ")
   const sw = mapRef.getBounds().getSouthWest();
   const ne = mapRef.getBounds().getNorthEast();
