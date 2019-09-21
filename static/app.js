@@ -229,7 +229,6 @@ function clearMarkers() {
       stationDataFeatures = features;
     }
   );
-});
 }
 
 // // Sets the map on all markers in the array.
