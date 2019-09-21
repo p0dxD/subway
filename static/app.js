@@ -226,6 +226,7 @@ function clearMarkers() {
     `/data/subway-stations?stations=${stationsToShow}&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
     null,
     features => {
+      console.log("Executing this asynch ")
       stationDataFeatures.forEach(dataFeature => {
         console.log("Removing: " + dataFeature);
         mapRef.data.remove(dataFeature);
