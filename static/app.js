@@ -233,8 +233,8 @@ function clearMarkers() {
       stationDataFeatures = features;
     }
   );
-
-  mapRef.event.trigger(map, 'resize');
+    console.log("Refreshing map");
+  google.maps.event.trigger(map, 'resize');
 }
 
 // // Sets the map on all markers in the array.
