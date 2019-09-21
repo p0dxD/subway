@@ -10,7 +10,7 @@ import (
         "strings"
         "path/filepath"	
         "io/ioutil"
-        // "reflect"
+        "reflect"
 
         rtree "github.com/dhconnelly/rtreego"
         geojson "github.com/paulmach/go.geojson"
@@ -136,6 +136,7 @@ func subwayStationsHandler(w http.ResponseWriter, r *http.Request) {
         }
         s := Stations.SearchIntersect(rect)
         fmt.Printf("STATIINS:%+v\n",s)
+        fmt.Println(reflect.TypeOf(s))
         fc, err := clusterStations(s, int(zm))
         // fmt.Printf("Fucking object: %+v\n\n", fc)
         if err != nil {
