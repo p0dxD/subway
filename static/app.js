@@ -216,13 +216,23 @@ function initMap() {
 
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
+  // google.maps.event.trigger(mapRef,'resize')
   let stationDataFeatures = [];
-  stationsToShow = "123"
-
-  // mapRef.setMap(null);
-  google.maps.event.trigger(mapRef.map,'resize');
-  //   console.log("Refreshing map");
-  // google.maps.event.trigger(mapRef, 'resize');
+  stationsToShow = "123";
+  const sw = mapRef.getBounds().getSouthWest();
+  const ne = mapRef.getBounds().getNorthEast();
+  const zm = mapRef.getZoom();
+  mapRef.data.loadGeoJson(
+    `/data/subway-stations?stations=${stationsToShow}&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
+    null,
+    features => {
+      stationDataFeatures.forEach(dataFeature => {
+        console.log("Removing: " + dataFeature);
+        mapRef.data.remove(dataFeature);
+      });
+      stationDataFeatures = features;
+    }
+  );
 }
 
 // // Sets the map on all markers in the array.
