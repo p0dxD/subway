@@ -144,8 +144,6 @@ func subwayStationsHandler(w http.ResponseWriter, r *http.Request) {
                 http.Error(w, str, 500)
                 return
         }
-        fmt.Printf("FC:%+v\n",fc)
-        fmt.Println(reflect.TypeOf(fc))
         err = json.NewEncoder(w).Encode(fc)
         if err != nil {
                 str := fmt.Sprintf("Couldn't encode results: %s", err)

@@ -114,6 +114,7 @@ const routeColors = {
 
 var map
 var stationsToShow
+var stationDataFeatures = []
 // initMap is called from the Google Maps JS library after the library has initialised itself.
 function initMap() {
   console.log("Initiating map.")
@@ -129,7 +130,6 @@ function initMap() {
   });
 
   const infowindow = new google.maps.InfoWindow();
-  let stationDataFeatures = [];
 
   // Load GeoJSON for subway lines. Stations are loaded in the idle callback.
   map.data.loadGeoJson('/data/subway-lines');
@@ -228,11 +228,11 @@ function clearMarkers() {
     null,
     features => {
       console.log("Executing this asynch  " +features)
-      features.forEach(dataFeature => {
+      stationDataFeatures.forEach(dataFeature => {
         console.log("Removing: " + dataFeature);
         map.data.remove(dataFeature);
       });
-      // stationDataFeatures = features;
+      stationDataFeatures = features;
     }
   );
 }
