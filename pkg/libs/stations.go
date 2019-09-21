@@ -87,7 +87,7 @@ func loadStations(w http.ResponseWriter, r *http.Request) {
 }
 
 func refreshStations(stations string){
-        // Stations = rtree.NewTree(2, 25, 50)
+        Stations = rtree.NewTree(2, 25, 50)
         stationsGeojson := GeoJSON["subway-stations.geojson"]
         fc, err := geojson.UnmarshalFeatureCollection(stationsGeojson)
         if err != nil {
@@ -135,6 +135,7 @@ func subwayStationsHandler(w http.ResponseWriter, r *http.Request) {
                 return
         }
         s := Stations.SearchIntersect(rect)
+        fmt.Printf("STATIINS:%+v\n",s)
         fc, err := clusterStations(s, int(zm))
         // fmt.Printf("Fucking object: %+v\n\n", fc)
         if err != nil {
