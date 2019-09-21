@@ -113,9 +113,11 @@ const routeColors = {
 };
 
 var mapRef
+var stationsToShow
 // initMap is called from the Google Maps JS library after the library has initialised itself.
 function initMap() {
   console.log("Initiating map.")
+  stationsToShow ="all"
   const map = new google.maps.Map(document.querySelector('#map'), {
     zoom: 12,
     center: {
@@ -199,7 +201,7 @@ function initMap() {
     const ne = map.getBounds().getNorthEast();
     const zm = map.getZoom();
     map.data.loadGeoJson(
-      `/data/subway-stations?stations=all&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
+      `/data/subway-stations?stations=${stationsToShow}&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
       null,
       features => {
         stationDataFeatures.forEach(dataFeature => {
@@ -215,6 +217,7 @@ function initMap() {
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
   let stationDataFeatures = [];
+  stationsToShow = "123"
   console.log("Removing: ")
   const sw = mapRef.getBounds().getSouthWest();
   const ne = mapRef.getBounds().getNorthEast();

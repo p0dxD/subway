@@ -100,7 +100,7 @@ func refreshStations(stations string){
                 // fmt.Printf("Inserting station:%+v\n",f.Properties)
                 // fmt.Printf("Inserting station:%s\n",f.Properties["line"])
                 if stations != "all" {
-                        if strings.Contains(f.Properties["line"].(string), "1") || strings.Contains(f.Properties["line"].(string), "2")  {
+                        if strings.Contains(f.Properties["line"].(string), "1")  {
                                 Stations.Insert(&Station{f})
                         }
                 }else {
