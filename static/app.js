@@ -234,7 +234,7 @@ function clearMarkers() {
     }
   );
     console.log("Refreshing map");
-  google.maps.event.trigger(map, 'resize');
+  google.maps.event.trigger(mapRef, 'resize');
 }
 
 // // Sets the map on all markers in the array.
