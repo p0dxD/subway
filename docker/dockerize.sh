@@ -1,5 +1,7 @@
 #!/bin/bash
 # docker="$DOCKER"/docker.exe
+echo "Removing old image"
+docker rmi $(docker images --format "{{.ID}}: {{.Repository}}" |  grep "go-subway" | awk '{ print $1 }' | rev |cut -c 2- | rev)
 echo "Creating image"
 docker build -t go-subway -f docker/Dockerfile .
 echo "Cealing old images"
