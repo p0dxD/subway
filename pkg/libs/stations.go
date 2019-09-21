@@ -87,7 +87,7 @@ func loadStations(w http.ResponseWriter, r *http.Request) {
 }
 
 func refreshStations(stations string){
-        Stations = rtree.NewTree(2, 25, 50)
+        // Stations = rtree.NewTree(2, 25, 50)
         stationsGeojson := GeoJSON["subway-stations.geojson"]
         fc, err := geojson.UnmarshalFeatureCollection(stationsGeojson)
         if err != nil {
