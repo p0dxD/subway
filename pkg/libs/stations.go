@@ -94,10 +94,11 @@ func refreshStations(stations string){
                 // Note: this will take down the GAE instance by exiting this process.
                 log.Fatal(err)
         }
+        fmt.Printf("Inserting for stations:%s\n",stations)
         for _, f := range fc.Features {
                 fmt.Println(reflect.TypeOf(f.Properties))
-                fmt.Printf("Inserting station:%+v\n",f.Properties)
-                fmt.Printf("Inserting station:%s\n",f.Properties["line"])
+                // fmt.Printf("Inserting station:%+v\n",f.Properties)
+                // fmt.Printf("Inserting station:%s\n",f.Properties["line"])
                 if stations != "all" {
                         if strings.Contains(f.Properties["line"].(string), "1") || strings.Contains(f.Properties["line"].(string), "2")  {
                                 Stations.Insert(&Station{f})
