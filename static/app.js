@@ -3,265 +3,64 @@
 /* eslint-env browser */
 /* eslint quotes: ["warn", "single"]*/
 
-// Replace the following with the JSON from the Styling Wizard
+// Map Style for the basemap tiles.
 const mapStyle = [
   {
-    "elementType": "geometry",
-    "stylers": [
+    elementType: 'geometry',
+    stylers: [
       {
-        "color": "#212121"
+        color: '#eceff1'
       }
     ]
   },
   {
-    "elementType": "labels",
-    "stylers": [
+    elementType: 'labels',
+    stylers: [
       {
-        "visibility": "off"
+        visibility: 'off'
       }
     ]
   },
   {
-    "elementType": "labels.icon",
-    "stylers": [
+    featureType: 'administrative',
+    elementType: 'labels',
+    stylers: [
       {
-        "visibility": "off"
+        visibility: 'off'
       }
     ]
   },
   {
-    "elementType": "labels.text.fill",
-    "stylers": [
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [
       {
-        "color": "#757575"
+        color: '#cfd8dc'
       }
     ]
   },
   {
-    "elementType": "labels.text.stroke",
-    "stylers": [
+    featureType: 'road',
+    elementType: 'geometry.stroke',
+    stylers: [
       {
-        "color": "#212121"
+        visibility: 'off'
       }
     ]
   },
   {
-    "featureType": "administrative",
-    "elementType": "geometry",
-    "stylers": [
+    featureType: 'road.local',
+    stylers: [
       {
-        "color": "#757575"
+        visibility: 'off'
       }
     ]
   },
   {
-    "featureType": "administrative.country",
-    "elementType": "labels.text.fill",
-    "stylers": [
+    featureType: 'water',
+    stylers: [
       {
-        "color": "#9e9e9e"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.land_parcel",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.locality",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#bdbdbd"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.neighborhood",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.business",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#181818"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#616161"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#1b1b1b"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#2c2c2c"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#8a8a8a"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#373737"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#3c3c3c"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway.controlled_access",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#4e4e4e"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#616161"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#000000"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#3d3d3d"
+        color: '#b0bec5'
       }
     ]
   }
@@ -313,8 +112,10 @@ const routeColors = {
   S: '#808183'
 };
 
+var mapRef
 // initMap is called from the Google Maps JS library after the library has initialised itself.
 function initMap() {
+  console.log("Initiating map.")
   const map = new google.maps.Map(document.querySelector('#map'), {
     zoom: 12,
     center: {
@@ -324,6 +125,7 @@ function initMap() {
     },
     styles: mapStyle
   });
+  mapRef = map;
   const infowindow = new google.maps.InfoWindow();
   let stationDataFeatures = [];
 
@@ -332,9 +134,21 @@ function initMap() {
 
   // Style the GeoJSON features (stations & lines)
   map.data.setStyle(feature => {
-    const line = feature.getProperty('line');
-    // Stations have line property, while lines do not.
-    if (line) {
+    const type = feature.getProperty('type');
+    if (type === 'cluster') {
+      // Icon path from: https://material.io/icons/#ic_add_circle_outline
+      return {
+        icon: {
+          fillColor: '#00b0ff',
+          strokeColor: '#3c8cb8',
+          fillOpacity: 1.0,
+          scale: 1.2,
+          path: 'M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4' +
+            '.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8' +
+            's3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'
+        }
+      };
+    } else if (type === 'station') {
       // Icon path from: https://material.io/icons/#ic_train
       return {
         icon: {
@@ -351,7 +165,7 @@ function initMap() {
       };
     }
 
-    // if type is not a station, it's a subway line
+    // if type is not a station or a cluster, it's a subway line
     const routeSymbol = feature.getProperty('rt_symbol');
     return {
       strokeColor: routeColors[routeSymbol]
@@ -360,18 +174,14 @@ function initMap() {
 
   map.data.addListener('click', ev => {
     const f = ev.feature;
-    const stationName = f.getProperty('name');
-    let line = f.getProperty('line');
-    // Stations have line property, while lines do not.
-    if (!line) {
+    const title = f.getProperty('title');
+    const description = f.getProperty('description');
+
+    if (!description) {
       return;
     }
-    if (line.includes('-')) {
-      line += ' lines';
-    } else {
-      line += ' line';
-    }
-    infowindow.setContent(`<b>${stationName} Station</b><br/>Serves ${line}`);
+
+    infowindow.setContent(`<b>${title}</b><br/> ${description}`);
     // Hat tip geocodezip: http://stackoverflow.com/questions/23814197
     infowindow.setPosition(f.getGeometry().get());
     infowindow.setOptions({
@@ -384,13 +194,16 @@ function initMap() {
   // moving, zooming,  panning or animating. We use it to load
   // Geojson for the new viewport.
   google.maps.event.addListener(map, 'idle', () => {
+    console.log("Removing: ")
     const sw = map.getBounds().getSouthWest();
     const ne = map.getBounds().getNorthEast();
+    const zm = map.getZoom();
     map.data.loadGeoJson(
-      `/data/subway-stations?viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}`,
+      `/data/subway-stations?viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
       null,
       features => {
         stationDataFeatures.forEach(dataFeature => {
+          console.log("Removing: " + dataFeature);
           map.data.remove(dataFeature);
         });
         stationDataFeatures = features;
@@ -398,3 +211,24 @@ function initMap() {
     );
   });
 }
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  // Load GeoJSON for subway lines. Stations are loaded in the idle callback.
+  mapRef.data.loadGeoJson('/data/subway-lines');
+}
+
+// // Sets the map on all markers in the array.
+// function setMapOnAll(map) {
+//   map.data.loadGeoJson(
+//     ``,
+//     null,
+//     features => {
+//       stationDataFeatures.forEach(dataFeature => {
+//         console.log("Removing: " + dataFeature);
+//         map.data.remove(dataFeature);
+//       });
+//       stationDataFeatures = features;
+//     }
+//   );
+// }
