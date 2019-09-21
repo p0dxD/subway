@@ -204,6 +204,7 @@ function initMap() {
       `/data/subway-stations?stations=${stationsToShow}&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
       null,
       features => {
+        console.log("Executing this asynch  " +stationDataFeatures)
         stationDataFeatures.forEach(dataFeature => {
           console.log("Removing: " + dataFeature);
           map.data.remove(dataFeature);
