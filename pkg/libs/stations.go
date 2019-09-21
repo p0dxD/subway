@@ -10,7 +10,7 @@ import (
         "strings"
         "path/filepath"	
         "io/ioutil"
-        "reflect"
+        // "reflect"
 
         rtree "github.com/dhconnelly/rtreego"
         geojson "github.com/paulmach/go.geojson"
