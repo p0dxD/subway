@@ -220,7 +220,7 @@ function clearMarkers() {
   const ne = mapRef.getBounds().getNorthEast();
   const zm = mapRef.getZoom();
   mapRef.data.loadGeoJson(
-    `/data/subway-stations?stations=all&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
+    `/data/subway-stations?stations=123&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
     null,
     features => {
       stationDataFeatures.forEach(dataFeature => {
