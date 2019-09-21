@@ -96,7 +96,7 @@ func refreshStations(stations string){
         }
         fmt.Printf("Inserting for stations:%s\n",stations)
         for _, f := range fc.Features {
-                fmt.Println(reflect.TypeOf(f.Properties))
+                // fmt.Println(reflect.TypeOf(f.Properties))
                 // fmt.Printf("Inserting station:%+v\n",f.Properties)
                 // fmt.Printf("Inserting station:%s\n",f.Properties["line"])
                 if stations != "all" {
@@ -136,7 +136,7 @@ func subwayStationsHandler(w http.ResponseWriter, r *http.Request) {
         }
         s := Stations.SearchIntersect(rect)
         fc, err := clusterStations(s, int(zm))
-        fmt.Printf("Fucking object: %+v\n\n", fc)
+        // fmt.Printf("Fucking object: %+v\n\n", fc)
         if err != nil {
                 str := fmt.Sprintf("Couldn't cluster results: %s", err)
                 http.Error(w, str, 500)
