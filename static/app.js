@@ -219,7 +219,8 @@ function clearMarkers() {
   let stationDataFeatures = [];
   stationsToShow = "123"
 
-  mapRef.setMap(null);
+  // mapRef.setMap(null);
+  google.maps.event.trigger(mapRef.map,'resize');
   //   console.log("Refreshing map");
   // google.maps.event.trigger(mapRef, 'resize');
 }
