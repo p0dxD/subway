@@ -218,23 +218,23 @@ function initMap() {
 function clearMarkers() {
   let stationDataFeatures = [];
   stationsToShow = "123"
-  console.log("Removing: ")
-  const sw = mapRef.getBounds().getSouthWest();
-  const ne = mapRef.getBounds().getNorthEast();
-  const zm = mapRef.getZoom();
-  mapRef.data.loadGeoJson(
-    `/data/subway-stations?stations=123&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
-    null,
-    features => {
-      stationDataFeatures.forEach(dataFeature => {
-        console.log("Removing: " + dataFeature);
-        mapRef.data.remove(dataFeature);
-      });
-      stationDataFeatures = features;
-    }
-  );
-    console.log("Refreshing map");
-  google.maps.event.trigger(mapRef, 'resize');
+  // console.log("Removing: ")
+  // const sw = mapRef.getBounds().getSouthWest();
+  // const ne = mapRef.getBounds().getNorthEast();
+  // const zm = mapRef.getZoom();
+  // mapRef.data.loadGeoJson(
+  //   `/data/subway-stations?stations=123&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
+  //   null,
+  //   features => {
+  //     stationDataFeatures.forEach(dataFeature => {
+  //       console.log("Removing: " + dataFeature);
+  //       mapRef.data.remove(dataFeature);
+  //     });
+  //     stationDataFeatures = features;
+  //   }
+  // );
+  //   console.log("Refreshing map");
+  // google.maps.event.trigger(mapRef, 'resize');
 }
 
 // // Sets the map on all markers in the array.
