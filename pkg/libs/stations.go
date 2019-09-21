@@ -56,7 +56,7 @@ func cacheGeoJSON() {
 // Init is called from the App Engine runtime to initialize the app.
 func Init() {
         cacheGeoJSON()
-        refreshStations(nil)
+        refreshStations("all")
         http.HandleFunc("/data/subway-stations", subwayStationsHandler)
         http.HandleFunc("/data/subway-lines", subwayLinesHandler)
         http.HandleFunc("/loadstation", loadStations)
@@ -83,10 +83,10 @@ func loadStations(w http.ResponseWriter, r *http.Request) {
     
         log.Println("Url Param 'stations' is: " + string(stations))
 
-        refreshStations(nil)
+        refreshStations("all")
 }
 
-func refreshStations(stations []string){
+func refreshStations(stations string){
         Stations = rtree.NewTree(2, 25, 50)
         stationsGeojson := GeoJSON["subway-stations.geojson"]
         fc, err := geojson.UnmarshalFeatureCollection(stationsGeojson)
@@ -98,10 +98,10 @@ func refreshStations(stations []string){
                 fmt.Println(reflect.TypeOf(f.Properties))
                 fmt.Printf("Inserting station:%+v\n",f.Properties)
                 fmt.Printf("Inserting station:%s\n",f.Properties["line"])
-                if stations != nil {
-                if strings.Contains(f.Properties["line"].(string), "1") || strings.Contains(f.Properties["line"].(string), "2")  {
-                        Stations.Insert(&Station{f})
-                }
+                if stations != "all" {
+                        if strings.Contains(f.Properties["line"].(string), "1") || strings.Contains(f.Properties["line"].(string), "2")  {
+                                Stations.Insert(&Station{f})
+                        }
                 }else {
                         Stations.Insert(&Station{f})
                 }
@@ -114,10 +114,12 @@ func refreshStations(stations []string){
 // and writes a GeoJSON response of the features contained in
 // that viewport into w.
 func subwayStationsHandler(w http.ResponseWriter, r *http.Request) {
-        var a = []string{"Hello"}
-        refreshStations(a)
+
         w.Header().Set("Content-type", "application/json")
         vp := r.FormValue("viewport")
+        stations := r.FormValue("stations")
+
+        refreshStations(stations)
         // fmt.Printf("Viewport: %s", vp)
         rect, err := newRect(vp)
         if err != nil {

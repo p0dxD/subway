@@ -199,7 +199,7 @@ function initMap() {
     const ne = map.getBounds().getNorthEast();
     const zm = map.getZoom();
     map.data.loadGeoJson(
-      `/data/subway-stations?viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
+      `/data/subway-stations?stations=all&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
       null,
       features => {
         stationDataFeatures.forEach(dataFeature => {
@@ -214,8 +214,22 @@ function initMap() {
 
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
-  // Load GeoJSON for subway lines. Stations are loaded in the idle callback.
-  mapRef.data.loadGeoJson('/data/subway-lines');
+  console.log("Removing: ")
+  const sw = mapRef.getBounds().getSouthWest();
+  const ne = mapRef.getBounds().getNorthEast();
+  const zm = mapRef.getZoom();
+  mapRef.data.loadGeoJson(
+    `/data/subway-stations?stations=all&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
+    null,
+    features => {
+      stationDataFeatures.forEach(dataFeature => {
+        console.log("Removing: " + dataFeature);
+        mapRef.data.remove(dataFeature);
+      });
+      stationDataFeatures = features;
+    }
+  );
+});
 }
 
 // // Sets the map on all markers in the array.
