@@ -8,7 +8,7 @@ echo "Cealing old images"
 yes | docker image prune
 
 echo "Stopping old container"
-old_container=$(docker ps -a | grep "go-subway" | awk '{ print $1 }')
+old_container=$(docker ps -a | grep "/app/subway" | awk '{ print $1 }')
 if [ ! -z $old_container ]; then
     docker stop $old_container
     docker rm  $old_container
