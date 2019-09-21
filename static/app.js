@@ -112,7 +112,7 @@ const routeColors = {
   S: '#808183'
 };
 
-const map
+var map
 var stationsToShow
 // initMap is called from the Google Maps JS library after the library has initialised itself.
 function initMap() {
