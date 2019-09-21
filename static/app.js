@@ -112,13 +112,13 @@ const routeColors = {
   S: '#808183'
 };
 
-var mapRef
+const map
 var stationsToShow
 // initMap is called from the Google Maps JS library after the library has initialised itself.
 function initMap() {
   console.log("Initiating map.")
   stationsToShow ="all"
-  const map = new google.maps.Map(document.querySelector('#map'), {
+   map = new google.maps.Map(document.querySelector('#map'), {
     zoom: 12,
     center: {
       // New York City
@@ -127,7 +127,7 @@ function initMap() {
     },
     styles: mapStyle
   });
-  mapRef = map;
+
   const infowindow = new google.maps.InfoWindow();
   let stationDataFeatures = [];
 
@@ -216,20 +216,20 @@ function initMap() {
 
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
-  // google.maps.event.trigger(mapRef,'resize')
+  // google.maps.event.trigger(map,'resize')
   let stationDataFeatures = [];
   stationsToShow = "123";
-  const sw = mapRef.getBounds().getSouthWest();
-  const ne = mapRef.getBounds().getNorthEast();
-  const zm = mapRef.getZoom();
-  mapRef.data.loadGeoJson(
+  const sw = map.getBounds().getSouthWest();
+  const ne = map.getBounds().getNorthEast();
+  const zm = map.getZoom();
+  map.data.loadGeoJson(
     `/data/subway-stations?stations=${stationsToShow}&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
     null,
     features => {
       console.log("Executing this asynch ")
       stationDataFeatures.forEach(dataFeature => {
         console.log("Removing: " + dataFeature);
-        mapRef.data.remove(dataFeature);
+        map.data.remove(dataFeature);
       });
       stationDataFeatures = features;
     }
