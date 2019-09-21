@@ -115,6 +115,7 @@ const routeColors = {
 var mapRef
 // initMap is called from the Google Maps JS library after the library has initialised itself.
 function initMap() {
+  console.log("Initiating map")
   const map = new google.maps.Map(document.querySelector('#map'), {
     zoom: 12,
     center: {
