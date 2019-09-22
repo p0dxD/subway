@@ -60,6 +60,7 @@ func Init() {
         http.HandleFunc("/data/subway-stations", subwayStationsHandler)
         http.HandleFunc("/data/subway-lines", subwayLinesHandler)
         http.HandleFunc("/loadstation", loadStations)
+        http.HandleFunc("/filther", filtherStations)
 }
 
 func subwayLinesHandler(w http.ResponseWriter, r *http.Request) {
@@ -85,6 +86,23 @@ func loadStations(w http.ResponseWriter, r *http.Request) {
 
         refreshStations("all")
 }
+
+// loadStations loads the geojson features from
+// `subway-stations.geojson` into the `Stations` rtree.
+func filtherStations(w http.ResponseWriter, r *http.Request) {
+        w.Header().Set("Content-type", "application/json")
+        // vp := r.FormValue("viewport")
+        // stations := r.FormValue("stations")
+        stationsGeojson := GeoJSON["subway-stations.geojson"]
+        fc, err := geojson.UnmarshalFeatureCollection(stationsGeojson)
+        err = json.NewEncoder(w).Encode(fc)
+        if err != nil {
+                str := fmt.Sprintf("Couldn't encode results: %s", err)
+                http.Error(w, str, 500)
+                return
+        }
+}
+
 
 func refreshStations(stations string){
         Stations = rtree.NewTree(2, 25, 50)
