@@ -226,7 +226,7 @@ function clearMarkers() {
 
   map.data.forEach(function(feature) {
     // If you want, check here for some constraints.
-    if(!!feature.h.description && feature.h.description.includes("1")) {
+    if(!!feature.h.description && !feature.h.description.includes("1")) {
       console.log("Removing feature")
       map.data.remove(feature);
     }
