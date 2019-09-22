@@ -235,7 +235,7 @@ function clearMarkers() {
       stationDataFeatures = features;
     }
   );
-  map.data.setMap(map)
+  map.data.setMap(null)
 }
 
 // // Sets the map on all markers in the array.
