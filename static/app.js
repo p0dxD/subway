@@ -206,7 +206,7 @@ function initMap() {
       features => {
         console.log("Executing this asynch  " +stationDataFeatures)
         stationDataFeatures.forEach(dataFeature => {
-          console.log("Removing: " + map.data.contains(dataFeature));
+          console.log("Contains: " + map.data.contains(dataFeature));
           map.data.remove(dataFeature);
         });
         stationDataFeatures = features;
