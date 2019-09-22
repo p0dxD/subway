@@ -220,18 +220,18 @@ function clearMarkers() {
   // google.maps.event.trigger(map,'resize')
   let stationDataFeatures = [];
   stationsToShow = "123";
-  const sw = map.getBounds().getSouthWest();
-  const ne = map.getBounds().getNorthEast();
-  const zm = map.getZoom();
+//   const sw = map.getBounds().getSouthWest();
+//   const ne = map.getBounds().getNorthEast();
+//   const zm = map.getZoom();
 
-  map.data.forEach(function(feature) {
-    // If you want, check here for some constraints.
-    if(!!feature.h.description && !feature.h.description.includes("1")) {
-      console.log("Removing feature")
-      map.data.remove(feature);
-    }
-});
-console.log("setting zoom")
+//   map.data.forEach(function(feature) {
+//     // If you want, check here for some constraints.
+//     if(!!feature.h.description && !feature.h.description.includes("1")) {
+//       console.log("Removing feature")
+//       map.data.remove(feature);
+//     }
+// });
+// console.log("setting zoom")
 map.setZoom(map.getZoom())
 // console.log('Taking a break...');
 //  sleep(2000);
