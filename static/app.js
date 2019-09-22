@@ -230,12 +230,12 @@ function clearMarkers() {
       console.log("Executing this asynch  " +features)
       features.forEach(dataFeature => {
         console.log("Removing: " + dataFeature);
-        map.data.removefeature(dataFeature);
+        map.data.remove(dataFeature);
       });
       stationDataFeatures = features;
     }
   );
-  map.data.setMap(map)
+  map.data.setMap( map.data.getMap())
 }
 
 // // Sets the map on all markers in the array.
