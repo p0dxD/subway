@@ -90,6 +90,7 @@ func loadStations(w http.ResponseWriter, r *http.Request) {
 // loadStations loads the geojson features from
 // `subway-stations.geojson` into the `Stations` rtree.
 func filtherStations(w http.ResponseWriter, r *http.Request) {
+        Stations = rtree.NewTree(2, 25, 50)
         w.Header().Set("Content-type", "application/json")
         // vp := r.FormValue("viewport")
         // stations := r.FormValue("stations")

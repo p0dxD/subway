@@ -235,8 +235,8 @@ function clearMarkers() {
         map.data.remove(dataFeature);
       });
       stationDataFeatures = features;
-      map.data.setMap( map);
-    }
+      map.data.setMap(map);
+    } 
   );
 
   // console.log("Got the feature: " +features)
