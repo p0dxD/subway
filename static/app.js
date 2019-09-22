@@ -235,11 +235,12 @@ function clearMarkers() {
         map.data.remove(dataFeature);
       });
       stationDataFeatures = features;
+      map.data.setMap( map);
     }
   );
 
-  console.log("Got the feature: " +features)
-  map.data.setMap( map.data.getMap())
+  // console.log("Got the feature: " +features)
+  // map.data.setMap( map.data.getMap())
 }
 
 // // Sets the map on all markers in the array.
