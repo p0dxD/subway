@@ -220,24 +220,25 @@ function clearMarkers() {
   // google.maps.event.trigger(map,'resize')
   let stationDataFeatures = [];
   stationsToShow = "123";
-  const sw = map.getBounds().getSouthWest();
-  const ne = map.getBounds().getNorthEast();
-  const zm = map.getZoom();
-  var something 
-  map.data.loadGeoJson(
-    `/filther`,
-    null,
-    features => {
-      console.log("Executing this asynch  " +features)
-      something = features
-      features.forEach(dataFeature => {
-        console.log("Removing: " + dataFeature);
-        map.data.remove(dataFeature);
-      });
-      stationDataFeatures = features;
-      map.data.setMap(map);
-    } 
-  );
+  map.data.setMap(map);
+  // const sw = map.getBounds().getSouthWest();
+  // const ne = map.getBounds().getNorthEast();
+  // const zm = map.getZoom();
+  // var something 
+  // map.data.loadGeoJson(
+  //   `/filther`,
+  //   null,
+  //   features => {
+  //     console.log("Executing this asynch  " +features)
+  //     something = features
+  //     features.forEach(dataFeature => {
+  //       console.log("Removing: " + dataFeature);
+  //       map.data.remove(dataFeature);
+  //     });
+  //     stationDataFeatures = features;
+  //     map.data.setMap(map);
+  //   } 
+  // );
 
   // console.log("Got the feature: " +features)
   // map.data.setMap( map.data.getMap())
