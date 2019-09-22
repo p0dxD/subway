@@ -230,7 +230,7 @@ function clearMarkers() {
       console.log("Executing this asynch  " +features)
       features.forEach(dataFeature => {
         console.log("Removing: " + dataFeature);
-        map.data.remove(dataFeature);
+        map.data.removefeature(dataFeature);
       });
       stationDataFeatures = features;
     }
