@@ -220,7 +220,6 @@ function clearMarkers() {
   // google.maps.event.trigger(map,'resize')
   let stationDataFeatures = [];
   stationsToShow = "123";
-  map.data.setMap(map);
   const sw = map.getBounds().getSouthWest();
   const ne = map.getBounds().getNorthEast();
   const zm = map.getZoom();
@@ -235,9 +234,9 @@ function clearMarkers() {
         console.log("Contains: " + map.data.contains(dataFeature));
         map.data.remove(dataFeature);
         console.log("Contains after: " + map.data.contains(dataFeature));
+        map.data.setMap(map);
       });
       stationDataFeatures = features;
-      map.data.setMap(map);
     } 
   );
 
