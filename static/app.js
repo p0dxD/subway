@@ -223,17 +223,19 @@ function clearMarkers() {
   const sw = map.getBounds().getSouthWest();
   const ne = map.getBounds().getNorthEast();
   const zm = map.getZoom();
-  let tmpMap = new google.maps.Map(document.querySelector('#map'), {
-    zoom: map.getZoom(),
-    // center: {
-    //   // New York City
-    //   lat:  map.getBounds().getSouthWest(),
-    //   lng: map.getBounds().getNorthEast()
-    // },
-    styles: mapStyle
-  });
-
-  map = tmpMap
+  map.data.loadGeoJson(
+    `/data/subway-stations?stations=${stationsToShow}&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
+    null,
+    features => {
+      console.log("Executing this asynch  " +features)
+      features.forEach(dataFeature => {
+        console.log("Removing: " + dataFeature);
+        map.data.remove(dataFeature);
+      });
+      // stationDataFeatures = features;
+    }
+  );
+  map.data.setMap(map)
 }
 
 // // Sets the map on all markers in the array.
