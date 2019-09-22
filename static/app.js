@@ -231,6 +231,8 @@ function clearMarkers() {
       map.data.remove(feature);
     }
 });
+console.log("setting zoom")
+map.setZoom(map.getZoom())
 // console.log('Taking a break...');
 //  sleep(2000);
 //   map.data.loadGeoJson(
