@@ -225,11 +225,11 @@ function clearMarkers() {
   const zm = map.getZoom();
   let tmpMap = new google.maps.Map(document.querySelector('#map'), {
     zoom: map.getZoom(),
-    center: {
-      // New York City
-      lat:  map.getBounds().getSouthWest(),
-      lng: map.getBounds().getNorthEast()
-    },
+    // center: {
+    //   // New York City
+    //   lat:  map.getBounds().getSouthWest(),
+    //   lng: map.getBounds().getNorthEast()
+    // },
     styles: mapStyle
   });
 
