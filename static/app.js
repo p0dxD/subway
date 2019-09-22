@@ -224,7 +224,7 @@ function clearMarkers() {
   const ne = map.getBounds().getNorthEast();
   const zm = map.getZoom();
   map.data.loadGeoJson(
-    `/data/subway-stations?stations=${stationsToShow}&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
+    `/filther`,
     null,
     features => {
       console.log("Executing this asynch  " +features)
