@@ -204,9 +204,9 @@ function initMap() {
       `/data/subway-stations?stations=${stationsToShow}&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
       null,
       features => {
-        console.log("Executing this asynch  " +stationDataFeatures)
+        // console.log("Executing this asynch  " +stationDataFeatures)
         stationDataFeatures.forEach(dataFeature => {
-          console.log("Contains: " + map.data.contains(dataFeature));
+          // console.log("REmoving: " + map.data.contains(dataFeature));
           map.data.remove(dataFeature);
         });
         stationDataFeatures = features;
@@ -221,24 +221,24 @@ function clearMarkers() {
   let stationDataFeatures = [];
   stationsToShow = "123";
   map.data.setMap(map);
-  // const sw = map.getBounds().getSouthWest();
-  // const ne = map.getBounds().getNorthEast();
-  // const zm = map.getZoom();
-  // var something 
-  // map.data.loadGeoJson(
-  //   `/filther`,
-  //   null,
-  //   features => {
-  //     console.log("Executing this asynch  " +features)
-  //     something = features
-  //     features.forEach(dataFeature => {
-  //       console.log("Removing: " + dataFeature);
-  //       map.data.remove(dataFeature);
-  //     });
-  //     stationDataFeatures = features;
-  //     map.data.setMap(map);
-  //   } 
-  // );
+  const sw = map.getBounds().getSouthWest();
+  const ne = map.getBounds().getNorthEast();
+  const zm = map.getZoom();
+  var something 
+  map.data.loadGeoJson(
+    `/filther`,
+    null,
+    features => {
+      // console.log("Executing this asynch  " +features)
+      something = features
+      features.forEach(dataFeature => {
+        console.log("Contains: " + map.data.contains(dataFeature));
+        map.data.remove(dataFeature);
+      });
+      stationDataFeatures = features;
+      map.data.setMap(map);
+    } 
+  );
 
   // console.log("Got the feature: " +features)
   // map.data.setMap( map.data.getMap())
