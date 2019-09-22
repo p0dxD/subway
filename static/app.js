@@ -232,7 +232,7 @@ function clearMarkers() {
         console.log("Removing: " + dataFeature);
         map.data.remove(dataFeature);
       });
-      // stationDataFeatures = features;
+      stationDataFeatures = features;
     }
   );
   map.data.setMap(map)
