@@ -230,7 +230,7 @@ function clearMarkers() {
     map.data.remove(feature);
 });
 console.log('Taking a break...');
-await sleep(2000);
+ sleep(2000);
   map.data.loadGeoJson(
     `/filther`,
     null,
