@@ -234,6 +234,7 @@ function clearMarkers() {
       features.forEach(dataFeature => {
         console.log("Contains: " + map.data.contains(dataFeature));
         map.data.remove(dataFeature);
+        console.log("Contains after: " + map.data.contains(dataFeature));
       });
       stationDataFeatures = features;
       map.data.setMap(map);
