@@ -213,6 +213,8 @@ function initMap() {
       }
     );
   });
+
+  map.data.
 }
 
 // Removes the markers from the map, but keeps them in the array.
@@ -224,22 +226,25 @@ function clearMarkers() {
   const ne = map.getBounds().getNorthEast();
   const zm = map.getZoom();
   var something 
-  map.data.loadGeoJson(
-    `/filther`,
-    null,
-    features => {
-      // console.log("Executing this asynch  " +features)
-      something = features
-      features.forEach(dataFeature => {
-        console.log("Contains: " + map.data.contains(dataFeature));
-        map.data.remove(dataFeature);
-        console.log("Contains after: " + map.data.contains(dataFeature));
-        map.data.setMap(map);
-      });
-      stationDataFeatures = features;
-    } 
-  );
-
+  // map.data.loadGeoJson(
+  //   `/filther`,
+  //   null,
+  //   features => {
+  //     // console.log("Executing this asynch  " +features)
+  //     something = features
+  //     features.forEach(dataFeature => {
+  //       console.log("Contains: " + map.data.contains(dataFeature));
+  //       map.data.remove(dataFeature);
+  //       console.log("Contains after: " + map.data.contains(dataFeature));
+  //     });
+  //     stationDataFeatures = features;
+  //   } 
+  // );
+  map.data.forEach(function(feature) {
+    // If you want, check here for some constraints.
+    console.log("Removing feature")
+    map.data.remove(feature);
+});
   // console.log("Got the feature: " +features)
   // map.data.setMap( map.data.getMap())
 }
