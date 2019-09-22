@@ -118,7 +118,7 @@ var stationDataFeatures = []
 // initMap is called from the Google Maps JS library after the library has initialised itself.
 function initMap() {
   console.log("Initiating map.")
-  stationsToShow ="all"
+  stationsToShow = (localStorage.getItem("stationsToShow")) ? localStorage.getItem("stationsToShow") : "all";
    map = new google.maps.Map(document.querySelector('#map'), {
     zoom: 12,
     center: {
@@ -218,17 +218,20 @@ function initMap() {
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
   stationsToShow = "1";
+  localStorage.setItem("stationsToShow", stationsToShow);
   map.setZoom(map.getZoom())
 }
 
 // Removes the markers from the map, but keeps them in the array.
 function showMarkers() {
   stationsToShow = "all";
+  localStorage.setItem("stationsToShow", stationsToShow);
   map.setZoom(map.getZoom())
 }
 
 // Removes the markers from the map, but keeps them in the array.
 function deleteMarkers() {
   stationsToShow = "7";
+  localStorage.setItem("stationsToShow", stationsToShow);
   map.setZoom(map.getZoom())
 }
