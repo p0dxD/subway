@@ -217,57 +217,18 @@ function initMap() {
 
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
-  // google.maps.event.trigger(map,'resize')
-  let stationDataFeatures = [];
-  stationsToShow = "123";
-//   const sw = map.getBounds().getSouthWest();
-//   const ne = map.getBounds().getNorthEast();
-//   const zm = map.getZoom();
-
-//   map.data.forEach(function(feature) {
-//     // If you want, check here for some constraints.
-//     if(!!feature.h.description && !feature.h.description.includes("1")) {
-//       console.log("Removing feature")
-//       map.data.remove(feature);
-//     }
-// });
-// console.log("setting zoom")
-map.setZoom(map.getZoom())
-// console.log('Taking a break...');
-//  sleep(2000);
-//   map.data.loadGeoJson(
-//     `/filther`,
-//     null,
-//     features => {
-//       // console.log("Executing this asynch  " +features)
-//       something = features
-//       features.forEach(dataFeature => {
-//         console.log("Contains: " + map.data.contains(dataFeature));
-//         map.data.remove(dataFeature);
-//         console.log("Contains after: " + map.data.contains(dataFeature));
-//       });
-//       stationDataFeatures = features;
-//     } 
-//   );
-  // console.log("Got the feature: " +features)
-  // map.data.setMap( map.data.getMap())
+  stationsToShow = "1";
+  map.setZoom(map.getZoom())
 }
 
-// // Sets the map on all markers in the array.
-// function setMapOnAll(map) {
-//   map.data.loadGeoJson(
-//     ``,
-//     null,
-//     features => {
-//       stationDataFeatures.forEach(dataFeature => {
-//         console.log("Removing: " + dataFeature);
-//         map.data.remove(dataFeature);
-//       });
-//       stationDataFeatures = features;
-//     }
-//   );
-// }
+// Removes the markers from the map, but keeps them in the array.
+function showMarkers() {
+  stationsToShow = "all";
+  map.setZoom(map.getZoom())
+}
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+// Removes the markers from the map, but keeps them in the array.
+function deleteMarkers() {
+  stationsToShow = "7";
+  map.setZoom(map.getZoom())
 }
