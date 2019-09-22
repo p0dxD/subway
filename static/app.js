@@ -213,8 +213,6 @@ function initMap() {
       }
     );
   });
-
-  map.data.
 }
 
 // Removes the markers from the map, but keeps them in the array.
