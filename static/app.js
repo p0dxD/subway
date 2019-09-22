@@ -226,25 +226,27 @@ function clearMarkers() {
 
   map.data.forEach(function(feature) {
     // If you want, check here for some constraints.
-    console.log("Removing feature")
-    map.data.remove(feature);
+    if(feature.h.description.includes("1")) {
+      console.log("Removing feature")
+      map.data.remove(feature);
+    }
 });
-console.log('Taking a break...');
- sleep(2000);
-  map.data.loadGeoJson(
-    `/filther`,
-    null,
-    features => {
-      // console.log("Executing this asynch  " +features)
-      something = features
-      features.forEach(dataFeature => {
-        console.log("Contains: " + map.data.contains(dataFeature));
-        map.data.remove(dataFeature);
-        console.log("Contains after: " + map.data.contains(dataFeature));
-      });
-      stationDataFeatures = features;
-    } 
-  );
+// console.log('Taking a break...');
+//  sleep(2000);
+//   map.data.loadGeoJson(
+//     `/filther`,
+//     null,
+//     features => {
+//       // console.log("Executing this asynch  " +features)
+//       something = features
+//       features.forEach(dataFeature => {
+//         console.log("Contains: " + map.data.contains(dataFeature));
+//         map.data.remove(dataFeature);
+//         console.log("Contains after: " + map.data.contains(dataFeature));
+//       });
+//       stationDataFeatures = features;
+//     } 
+//   );
   // console.log("Got the feature: " +features)
   // map.data.setMap( map.data.getMap())
 }
