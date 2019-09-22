@@ -220,21 +220,18 @@ function clearMarkers() {
   // google.maps.event.trigger(map,'resize')
   let stationDataFeatures = [];
   stationsToShow = "123";
-  const sw = map.getBounds().getSouthWest();
-  const ne = map.getBounds().getNorthEast();
-  const zm = map.getZoom();
-  map.data.loadGeoJson(
-    `/filther`,
-    null,
-    features => {
-      console.log("Executing this asynch click: " +features)
-      features.forEach(dataFeature => {
-        console.log("Removing: " + dataFeature);
-        map.data.remove(dataFeature);
-      });
-      // stationDataFeatures = features;
-    }
-  );
+  // const sw = map.getBounds().getSouthWest();
+  // const ne = map.getBounds().getNorthEast();
+  // const zm = map.getZoom();
+  map = new google.maps.Map(document.querySelector('#map'), {
+    zoom: 12,
+    center: {
+      // New York City
+      lat: 40.7305,
+      lng: -73.9091
+    },
+    styles: mapStyle
+  });
 }
 
 // // Sets the map on all markers in the array.
