@@ -223,11 +223,13 @@ function clearMarkers() {
   const sw = map.getBounds().getSouthWest();
   const ne = map.getBounds().getNorthEast();
   const zm = map.getZoom();
+  var something 
   map.data.loadGeoJson(
     `/filther`,
     null,
     features => {
       console.log("Executing this asynch  " +features)
+      something = features
       features.forEach(dataFeature => {
         console.log("Removing: " + dataFeature);
         map.data.remove(dataFeature);
@@ -235,6 +237,8 @@ function clearMarkers() {
       stationDataFeatures = features;
     }
   );
+
+  console.log("Got the feature: " +features)
   map.data.setMap( map.data.getMap())
 }
 
