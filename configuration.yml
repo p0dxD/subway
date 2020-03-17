@@ -1,0 +1,13 @@
+projects:
+    -
+        name: p0dxd/subway
+        version: 1.0.0
+        stages:
+            build:
+                tool: go
+                version: 1.13
+            upload:
+                tool: docker
+                version: ~
+                 
+
