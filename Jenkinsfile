@@ -1,2 +1,2 @@
-@Library("Jenkins@feature/multiple-projects-same-repo") _
+@Library("Jenkins@develop") _
 jenkinsMain() 
