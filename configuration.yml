@@ -1,0 +1,15 @@
+projects:
+    -
+        name: p0dxd/subway
+        version: 1.0.0
+        path: ~
+        stages:
+            build:
+                tool: golang
+                version: 1.13.9-buster
+                configuration:
+                    - 'static/**/*'
+                    - 'data/**/*'
+            upload:
+                tool: docker
+                version: ~

@@ -112,11 +112,14 @@ const routeColors = {
   S: '#808183'
 };
 
-var mapRef
+var map
+var stationsToShow
+var stationDataFeatures = []
 // initMap is called from the Google Maps JS library after the library has initialised itself.
 function initMap() {
   console.log("Initiating map.")
-  const map = new google.maps.Map(document.querySelector('#map'), {
+  stationsToShow = (localStorage.getItem("stationsToShow")) ? localStorage.getItem("stationsToShow") : "all";
+   map = new google.maps.Map(document.querySelector('#map'), {
     zoom: 12,
     center: {
       // New York City
@@ -125,9 +128,8 @@ function initMap() {
     },
     styles: mapStyle
   });
-  mapRef = map;
+
   const infowindow = new google.maps.InfoWindow();
-  let stationDataFeatures = [];
 
   // Load GeoJSON for subway lines. Stations are loaded in the idle callback.
   map.data.loadGeoJson('/data/subway-lines');
@@ -199,11 +201,12 @@ function initMap() {
     const ne = map.getBounds().getNorthEast();
     const zm = map.getZoom();
     map.data.loadGeoJson(
-      `/data/subway-stations?viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
+      `/data/subway-stations?stations=${stationsToShow}&viewport=${sw.lat()},${sw.lng()}|${ne.lat()},${ne.lng()}&zoom=${zm}`,
       null,
       features => {
+        // console.log("Executing this asynch  " +stationDataFeatures)
         stationDataFeatures.forEach(dataFeature => {
-          console.log("Removing: " + dataFeature);
+          // console.log("REmoving: " + map.data.contains(dataFeature));
           map.data.remove(dataFeature);
         });
         stationDataFeatures = features;
@@ -214,21 +217,21 @@ function initMap() {
 
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
-  // Load GeoJSON for subway lines. Stations are loaded in the idle callback.
-  mapRef.data.loadGeoJson('/data/subway-lines');
+  stationsToShow = "1";
+  localStorage.setItem("stationsToShow", stationsToShow);
+  map.setZoom(map.getZoom())
 }
 
-// // Sets the map on all markers in the array.
-// function setMapOnAll(map) {
-//   map.data.loadGeoJson(
-//     ``,
-//     null,
-//     features => {
-//       stationDataFeatures.forEach(dataFeature => {
-//         console.log("Removing: " + dataFeature);
-//         map.data.remove(dataFeature);
-//       });
-//       stationDataFeatures = features;
-//     }
-//   );
-// }
+// Removes the markers from the map, but keeps them in the array.
+function showMarkers() {
+  stationsToShow = "all";
+  localStorage.setItem("stationsToShow", stationsToShow);
+  map.setZoom(map.getZoom())
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function deleteMarkers() {
+  stationsToShow = "7";
+  localStorage.setItem("stationsToShow", stationsToShow);
+  map.setZoom(map.getZoom())
+}

@@ -56,10 +56,11 @@ func cacheGeoJSON() {
 // Init is called from the App Engine runtime to initialize the app.
 func Init() {
         cacheGeoJSON()
-        refreshStations(nil)
+        refreshStations("all")
         http.HandleFunc("/data/subway-stations", subwayStationsHandler)
         http.HandleFunc("/data/subway-lines", subwayLinesHandler)
         http.HandleFunc("/loadstation", loadStations)
+        http.HandleFunc("/filther", filtherStations)
 }
 
 func subwayLinesHandler(w http.ResponseWriter, r *http.Request) {
@@ -83,10 +84,28 @@ func loadStations(w http.ResponseWriter, r *http.Request) {
     
         log.Println("Url Param 'stations' is: " + string(stations))
 
-        refreshStations(nil)
+        refreshStations("all")
 }
 
-func refreshStations(stations []string){
+// loadStations loads the geojson features from
+// `subway-stations.geojson` into the `Stations` rtree.
+func filtherStations(w http.ResponseWriter, r *http.Request) {
+        Stations = rtree.NewTree(2, 25, 50)
+        w.Header().Set("Content-type", "application/json")
+        // vp := r.FormValue("viewport")
+        // stations := r.FormValue("stations")
+        stationsGeojson := GeoJSON["subway-stations.geojson"]
+        fc, err := geojson.UnmarshalFeatureCollection(stationsGeojson)
+        err = json.NewEncoder(w).Encode(fc)
+        if err != nil {
+                str := fmt.Sprintf("Couldn't encode results: %s", err)
+                http.Error(w, str, 500)
+                return
+        }
+}
+
+
+func refreshStations(stations string){
         Stations = rtree.NewTree(2, 25, 50)
         stationsGeojson := GeoJSON["subway-stations.geojson"]
         fc, err := geojson.UnmarshalFeatureCollection(stationsGeojson)
@@ -94,14 +113,15 @@ func refreshStations(stations []string){
                 // Note: this will take down the GAE instance by exiting this process.
                 log.Fatal(err)
         }
+        fmt.Printf("Inserting for stations:%s\n",stations)
         for _, f := range fc.Features {
-                fmt.Println(reflect.TypeOf(f.Properties))
-                fmt.Printf("Inserting station:%+v\n",f.Properties)
-                fmt.Printf("Inserting station:%s\n",f.Properties["line"])
-                if stations != nil {
-                if strings.Contains(f.Properties["line"].(string), "1")  {
-                        Stations.Insert(&Station{f})
-                }
+                // fmt.Println(reflect.TypeOf(f.Properties))
+                // fmt.Printf("Inserting station:%+v\n",f.Properties)
+                // fmt.Printf("Inserting station:%s\n",f.Properties["line"])
+                if stations != "all" {
+                        if strings.Contains(f.Properties["line"].(string), stations)  {
+                                Stations.Insert(&Station{f})
+                        }
                 }else {
                         Stations.Insert(&Station{f})
                 }
@@ -114,10 +134,12 @@ func refreshStations(stations []string){
 // and writes a GeoJSON response of the features contained in
 // that viewport into w.
 func subwayStationsHandler(w http.ResponseWriter, r *http.Request) {
-        var a = []string{"Hello"}
-        refreshStations(a)
+
         w.Header().Set("Content-type", "application/json")
         vp := r.FormValue("viewport")
+        stations := r.FormValue("stations")
+
+        refreshStations(stations)
         // fmt.Printf("Viewport: %s", vp)
         rect, err := newRect(vp)
         if err != nil {
@@ -132,8 +154,10 @@ func subwayStationsHandler(w http.ResponseWriter, r *http.Request) {
                 return
         }
         s := Stations.SearchIntersect(rect)
+        fmt.Printf("STATIINS:%+v\n",s)
+        fmt.Println(reflect.TypeOf(s))
         fc, err := clusterStations(s, int(zm))
-        fmt.Printf("Fucking object: %+v\n\n", fc)
+        // fmt.Printf("Fucking object: %+v\n\n", fc)
         if err != nil {
                 str := fmt.Sprintf("Couldn't cluster results: %s", err)
                 http.Error(w, str, 500)
