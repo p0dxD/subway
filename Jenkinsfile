@@ -1,2 +1,2 @@
-@Library("Jenkins@develop") _
+@Library("Jenkins") _
 jenkinsMain() 

@@ -2,12 +2,14 @@ projects:
     -
         name: p0dxd/subway
         version: 1.0.0
+        path: ~
         stages:
             build:
-                tool: go
-                version: 1.13
+                tool: golang
+                version: 1.13.9-alpine3.11
+                configuration:
+                    - 'static/**/*'
+                    - 'data/**/*'
             upload:
                 tool: docker
                 version: ~
-                 
-
