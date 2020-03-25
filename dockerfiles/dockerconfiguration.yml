@@ -7,13 +7,13 @@
 #else anyone could create a simple app that asks for them and prints the value
 docker:
     -
-    command: run
-    arguments:
-        options: '-itd' 
-        ports:
-            - 3001:3001
-        environment:
-            GITHUB_TOKEN: '$GITHUB_TOKEN'
-            KEYSTORE_ALIAS: '$KEYSTORE_ALIAS'
-            KEYSTORE_PASSWORD: '$KEYSTORE_PASSWORD'
-            SPRING_PROFILES_ACTIVE: prod 
+        command: run
+        arguments:
+            options: '-itd' 
+            ports:
+                - 3001:3001
+            environment:
+                GITHUB_TOKEN: '$GITHUB_TOKEN'
+                KEYSTORE_ALIAS: '$KEYSTORE_ALIAS'
+                KEYSTORE_PASSWORD: '$KEYSTORE_PASSWORD'
+                SPRING_PROFILES_ACTIVE: prod 
