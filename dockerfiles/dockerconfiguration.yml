@@ -9,7 +9,7 @@ docker:
     -
         command: run
         arguments:
-            options: '-itd' 
+            config_options: '-itd' 
             ports:
                 - 3001:3001
             environment:
