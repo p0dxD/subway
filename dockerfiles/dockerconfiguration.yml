@@ -13,7 +13,5 @@ docker:
             ports:
                 - 3001:3001
             environment:
-                GITHUB_TOKEN: '$GITHUB_TOKEN'
-                KEYSTORE_ALIAS: '$KEYSTORE_ALIAS'
-                KEYSTORE_PASSWORD: '$KEYSTORE_PASSWORD'
-                SPRING_PROFILES_ACTIVE: prod 
+                PRIVATE_KEY: '$PRIVATE_KEY'
+                PUBLIC_KEY: '$PUBLIC_KEY'
