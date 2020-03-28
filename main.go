@@ -15,7 +15,6 @@ func main() {
 	Libs.Init()
 	http.Handle("/", http.FileServer(http.Dir("./static")))
 	log.Print("Now serving: https://localhost:3001")
-	http.ListenAndServe(":3001", nil)
 
 	err := http.ListenAndServeTLS(":3001", "fullchain.pem", "privkey.pem", nil)
 	if err != nil {
